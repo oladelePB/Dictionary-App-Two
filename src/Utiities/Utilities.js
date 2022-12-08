@@ -1,4 +1,4 @@
-import axios from "axios";
+
 
 export const dictionaryAPI = (lang, word, setData) => {
   try {

@@ -1,26 +1,26 @@
 import React from "react";
 import "./Header.css";
 import TextField from "@mui/material/TextField";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import { useCallback } from "react";
 import { debouncedSearch } from "../../Utiities/Utilities";
 
 const Header = ({ word, setWord }) => {
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-      primary: {
-        main: "#fff",
-      },
-    },
-  });
+  // const darkTheme = createTheme({
+  //   palette: {
+  //     mode: "dark",
+  //     primary: {
+  //       main: "#fff",
+  //     },
+  //   },
+  // });
 
   const handleTextChange = (e) => {
     setWord(e.target.value);
   };
 
   const optimizedSearchInput = useCallback(
-    debouncedSearch(handleTextChange, 1000)
+    debouncedSearch(handleTextChange, 1000), null
   );
 
   return (
