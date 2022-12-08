@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Container from "@mui/material/Container";
+import Header from "./Components/Header/Header";
+import Definition from "./Components/Definition/Definition";
+import { useEffect, useState } from "react";
+import { dictionaryAPI } from "./Utiities/Utilities";
 
 function App() {
+  const [meaning, setMeaning] = useState([]);
+  const [word, setWord] = useState("");
+
+  useEffect(() => {
+    async function fetchData() {
+      if (word !== "") {
+        const result = await dictionaryAPI("en", word, setMeaning);
+        if (result) {
+          setMeaning([...result]);
+        }
+      }
+    }
+    fetchData();
+  }, [word]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Container>
+        <Header word={word} setWord={setWord} />
+        {meaning && <Definition word={word} meaning={meaning} />}
+      </Container>
     </div>
   );
 }
